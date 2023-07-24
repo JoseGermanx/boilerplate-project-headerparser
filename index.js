@@ -1,6 +1,13 @@
 // index.js
 // where your node app starts
 
+/*
+You should provide your own project, not the example URL.
+Waiting:A request to /api/whoami should return a JSON object with your IP address in the ipaddress key.
+Waiting:A request to /api/whoami should return a JSON object with your preferred language in the language key.
+Waiting:A request to /api/whoami should return a JSON object with your software in the software key.
+*/
+
 // init project
 require('dotenv').config();
 var express = require('express');
@@ -23,6 +30,13 @@ app.get('/', function (req, res) {
 app.get('/api/hello', function (req, res) {
   res.json({ greeting: 'hello API' });
 });
+
+app.get('/api/whoami', function (req, res) {
+  const ipaddress = req.ip;
+  const language = req.headers['accept-language'];
+  const software = req.headers['user-agent'];
+  res.json({ ipaddress, language, software });
+}
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT || 3000, function () {
